@@ -28,8 +28,8 @@ defmodule Braintree.HTTP do
                     {:error, binary}
 
   @endpoints [
-    production: "https://api.braintreegateway.com/merchants/",
-    sandbox: "https://api.sandbox.braintreegateway.com/merchants/"
+    production: "https://api.braintreegateway.com/",
+    sandbox: "https://api.sandbox.braintreegateway.com/"
   ]
 
   @cacertfile "/certs/api_braintreegateway_com.ca.crt"
@@ -116,7 +116,7 @@ defmodule Braintree.HTTP do
     environment = Keyword.get_lazy(opts, :environment, fn -> Braintree.get_env(:environment, :sandbox) end)
     merchant_id = Keyword.get_lazy(opts, :merchant_id, fn -> Braintree.get_env(:merchant_id) end)
 
-    Keyword.fetch!(@endpoints, environment) <> merchant_id <> "/" <> path
+    Keyword.fetch!(@endpoints, environment) <> "merchants/" <> merchant_id <> "/" <> path
   end
 
   @doc false
